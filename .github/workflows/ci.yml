@@ -1,0 +1,30 @@
+name: Java CI Simulation
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Compile Java Files
+      run: javac App.java AppTest.java
+
+    - name: Run Application
+      run: java App
+
+    - name: Run Test
+      run: java AppTest
